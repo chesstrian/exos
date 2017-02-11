@@ -1,0 +1,12 @@
+{% extends 'app/base.html' %}
+
+{% load custom_tags %}
+
+{% block content %}
+  <h1>{{ object.username }}</h1>
+  <p class="lead">Birthday: {{ object.profile.birthday | date }}</p>
+  <p class="lead">Age: {{ object.profile.birthday | age }}</p>
+  <p class="lead">Eligible: {{ object.profile.birthday | eligible }}</p>
+  <p class="lead">Random number: {{ object.profile.random_number }}</p>
+  <p class="lead">BizzFuzz: {{ object.profile.random_number | bizz_fuzz }}</p>
+{% endblock %}

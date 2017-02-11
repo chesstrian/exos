@@ -1,0 +1,42 @@
+{% extends 'app/base.html' %}
+
+{% load custom_tags %}
+
+{% block content %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissable">
+      <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+      {{ message }}
+    </div>
+  {% endfor %}
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Username</th>
+        <th>Birthday</th>
+        <th>Eligible</th>
+        <th>Random Number</th>
+        <th>BizzFuzz</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for user in object_list %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td align="left"><a href="{% url 'user_edit_item' user.pk %}">{{ user.username }}</a></td>
+          <td align="right">{{ user.profile.birthday | date:'m/d/Y' }}</td>
+          <td align="left">{{ user.profile.birthday | eligible }}</td>
+          <td align="right">{{ user.profile.random_number }}</td>
+          <td>{{ user.profile.random_number | bizz_fuzz }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <hr />
+
+  <a href="{% url 'export_xls' %}" class="btn btn-lg btn-success">Export to XLS</a>
+{% endblock %}

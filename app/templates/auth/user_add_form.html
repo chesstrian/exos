@@ -1,0 +1,48 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+  <form class="form-horizontal" method="post">
+    {% csrf_token %}
+    <div class="form-group form-group-lg {% if form.username.errors %}has-error{% endif %}">
+      <label for="username" class="col-sm-4 control-label">{{ form.username.label_tag }}</label>
+      <div class="col-sm-6">
+        <input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            placeholder="Username"
+            value="{% if form.username.value %}{{ form.username.value }}{% endif %}"
+        >
+        {% for error in form.username.errors %}
+          <span class="help-block">{{ error }}</span>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="form-group form-group-lg {% if form.password1.errors %}has-error{% endif %}">
+      <label for="password1" class="col-sm-4 control-label">{{ form.password1.label_tag }}</label>
+      <div class="col-sm-6">
+        <input type="password" class="form-control" id="password1" name="password1" placeholder="Password">
+        {% for error in form.password1.errors %}
+          <span class="help-block">{{ error }}</span>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="form-group form-group-lg {% if form.password2.errors %}has-error{% endif %}">
+      <label for="password2" class="col-sm-4 control-label">{{ form.password2.label_tag }}</label>
+      <div class="col-sm-6">
+        <input type="password" class="form-control" id="password2" name="password2" placeholder="Password confirmation">
+        {% for error in form.password2.errors %}
+          <span class="help-block">{{ error }}</span>
+        {% endfor %}
+      </div>
+    </div>
+
+    <hr />
+
+    <button type="submit" class="btn btn-lg btn-success">Create user</button>
+    <button type="reset" class="btn btn-lg btn-danger">Reset form</button>
+  </form>
+{% endblock %}

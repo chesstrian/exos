@@ -1,0 +1,27 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+  <form class="form-horizontal">
+    <div class="form-group form-group-lg">
+      <label for="user_id" class="col-sm-4 control-label">Select user:</label>
+      <div class="col-sm-6">
+        <select class="form-control" id="user_id" name="user_id">
+          <option value="">Select a user from the list</option>
+          {% for user in users %}
+            <option value="{{ user.pk }}">{{ user.username }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <button type="button" id="go" class="btn btn-lg btn-success">Go</button>
+  </form>
+{% endblock %}
+
+{% block scripts %}
+  <script type="application/javascript">
+  $('#go').on('click', function () {
+    window.location.href += $('#user_id').val();
+  });
+  </script>
+{% endblock %}
